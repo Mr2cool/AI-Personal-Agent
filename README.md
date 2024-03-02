@@ -9,6 +9,22 @@ This project implements a personal agent using Streamlit, integrating various la
 - Supports custom questions through OpenAI's API key integration.
 - Provides responses to user queries in real-time.
 
+<!--
+## Screenshots
+
+### Main Interface
+
+![Main Interface](link_to_main_interface_screenshot)
+
+Description: This screenshot shows the main interface of the personal agent application.
+
+### Custom Question
+
+![Custom Question](link_to_custom_question_screenshot)
+
+Description: This screenshot demonstrates the feature allowing users to ask custom questions through OpenAI's API key integration.
+-->
+
 ## Setup
 
 1. Clone the repository to your local machine:
