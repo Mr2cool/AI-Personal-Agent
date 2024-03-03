@@ -22,19 +22,19 @@ Welcome to the AI Personal Agent project, where cutting-edge language models (LL
 
 ### Main Interface
 
-![Main Interface](Onboarding.png)
+![Main Interface](ss/Onboarding.png)
 
 Dive into the immersive main interface of the personal agent application, offering a visually engaging experience. 🌟
 
 ### Custom Questions
 
-![Custom Questions](Adiyogi.png)
+![Custom Questions](ss/Adiyogi.png)
 
-![API Key](API_Key.png)
+![API Key](ss/API_Key.png)
 
-![PM](PM.png)
+![PM](ss/PM.png)
 
-![PM Modi](PM_Modi.png)
+![PM Modi](ss/PM_Modi.png)
 
 These screenshots showcase the versatility of the personal agent, allowing users to pose custom questions through OpenAI's API key integration. 🎨📸
 
