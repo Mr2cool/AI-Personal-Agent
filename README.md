@@ -8,6 +8,7 @@ Welcome to the AI Personal Agent project, where cutting-edge language models (LL
   <img src="https://img.shields.io/badge/Streamlit-%23FF0000.svg?style=for-the-badge&logo=Streamlit&logoColor=red&color=white" alt="Streamlit">
   <img src="https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=Python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/DuckDuckGo-%23FFFFFF.svg?style=for-the-badge&logo=DuckDuckGo&logoColor=red&color=white" alt="DuckDuckGo">
+  <img src="https://img.shields.io/badge/Langchain-%23FF000.svg?style=for-the-badge&logo=Langchain&logoColor=white" alt="Langchain">
 </p>
 
 ## 🌟 Features
