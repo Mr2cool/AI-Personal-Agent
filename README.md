@@ -71,11 +71,13 @@ These screenshots showcase the versatility of the personal agent, allowing users
 
 ## Configuration
 
-- Customize the behavior of the personal agent by modifying the code in `agent.py`.
-- Adjust temperature settings and other parameters in the language model initialization for tailored responses.
+- **Customize Behavior:** Tailor the behavior of the personal agent by modifying the code in agent.py.
+- **Adjust Parameters:** Fine-tune temperature settings and other parameters in the language model initialization to enhance the quality of responses.
 
 ## Contributor
 
 [Pramod Koujalagi](https://github.com/pramodkoujalagi)
+
+Feel free to explore, engage, and contribute to this exciting project! 🌟🚀
 
 
