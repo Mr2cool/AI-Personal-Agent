@@ -3,18 +3,21 @@
 Welcome to the AI Personal Agent project, where cutting-edge language models (LLMs) converge to create an intuitive and responsive assistant. Harnessing the power of Streamlit, this project integrates diverse language models and tools to provide an interactive experience for users seeking assistance and answers. 🤖💬
 
 
-![Streamlit](https://img.shields.io/badge/Streamlit-%23FF0000.svg?style=for-the-badge&logo=Streamlit&logoColor=red&color=white)
-![OpenAI](https://img.shields.io/badge/OpenAI-%23FFFFFF.svg?style=for-the-badge&logo=OpenAI&logoColor=black)
-![DuckDuckGo](https://img.shields.io/badge/DuckDuckGo-%23FFFFFF.svg?style=for-the-badge&logo=DuckDuckGo&logoColor=red&color=white)
+<p align="center">
+  <img src="https://img.shields.io/badge/OpenAI-%23FFFFFF.svg?style=for-the-badge&logo=OpenAI&logoColor=black" alt="OpenAI">
+  <img src="https://img.shields.io/badge/Streamlit-%23FF0000.svg?style=for-the-badge&logo=Streamlit&logoColor=red&color=white" alt="Streamlit">
+  <img src="https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=Python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/DuckDuckGo-%23FFFFFF.svg?style=for-the-badge&logo=DuckDuckGo&logoColor=red&color=white" alt="DuckDuckGo">
+</p>
 
-## Features
+## 🌟 Features
 
 - **Interactive Interface**: Seamlessly interact with the personal agent through a user-friendly Streamlit interface.
 - **Robust Language Models**: Leverage state-of-the-art language models including OpenAI's GPT, DuckDuckGo search, and mathematical reasoning capabilities.
 - **Customizable Queries**: Empower users to ask tailored questions through OpenAI's API key integration, ensuring personalized responses.
 - **Real-time Responses**: Receive instantaneous responses to your queries, providing timely assistance whenever you need it. 🚀⏱️
 
-## Screenshots
+## 📸 Image Gallery
 
 ### Main Interface
 
