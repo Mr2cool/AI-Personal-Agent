@@ -1,6 +1,6 @@
 # AI Personal Agent
 
-This project implements a personal agent using Streamlit, integrating various language models and tools for answering user queries and providing assistance.
+This project implements a personal agent using Streamlit, integrating various large language models(LLM) and tools for answering user queries and providing assistance.
 
 ## Features
 
@@ -9,21 +9,25 @@ This project implements a personal agent using Streamlit, integrating various la
 - Supports custom questions through OpenAI's API key integration.
 - Provides responses to user queries in real-time.
 
-<!--
+
 ## Screenshots
 
 ### Main Interface
 
-![Main Interface](link_to_main_interface_screenshot)
+![](Onboarding.png)
 
-Description: This screenshot shows the main interface of the personal agent application.
+This screenshot shows the main interface of the personal agent application.
 
 ### Custom Question
 
-![Custom Question](link_to_custom_question_screenshot)
 
-Description: This screenshot demonstrates the feature allowing users to ask custom questions through OpenAI's API key integration.
--->
+![Custom Questions](Adiyogi.png)
+
+![](API_Key.png)
+![](PM.png)
+![](PM_Modi.png)
+
+These screenshots demonstrates the feature allowing users to ask custom questions through OpenAI's API key integration.
 
 ## Setup
 
