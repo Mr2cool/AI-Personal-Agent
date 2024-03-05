@@ -84,4 +84,7 @@ These screenshots showcase the versatility of the personal agent, allowing users
 
 Feel free to explore, engage, and contribute to this exciting project! 🌟🚀
 
+## ⚖️ License
+[MIT License](LICENSE)
+
 
