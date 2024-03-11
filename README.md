@@ -1,6 +1,6 @@
 # AI Personal Agent
 
-Welcome to the AI Personal Agent project, where cutting-edge language models (LLMs) converge to create an intuitive and responsive assistant. Harnessing the power of Streamlit, this project integrates diverse language models and tools to provide an interactive experience for users seeking assistance and answers. 🤖💬
+Welcome to the AI Personal Agent project, where cutting-edge language models (LLMs) converge to create an intuitive and responsive assistant. Harnessing the power of Streamlit, this project integrates language model and tools to provide an interactive experience for users seeking assistance and answers. 🤖💬
 
 
 <p align="center">
