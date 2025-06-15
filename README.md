@@ -1,90 +1,57 @@
 # AI Personal Agent
 
-Welcome to the AI Personal Agent project, where cutting-edge language models (LLMs) converge to create an intuitive and responsive assistant. Harnessing the power of Streamlit, this project integrates language model and tools to provide an interactive experience for users seeking assistance and answers. 🤖💬
+Welcome to the AI Personal Agent project! This assistant leverages OpenAI's GPT models and Bright Data for real-time web search, with a modern Flask web UI, user authentication, admin controls, and multi-agent logic (manager, critic, fact-check, validation agents).
 
-
-<p align="center">
-  <img src="https://img.shields.io/badge/OpenAI-%23FFFFFF.svg?style=for-the-badge&logo=OpenAI&logoColor=black" alt="OpenAI">
-  <img src="https://img.shields.io/badge/Streamlit-%23FF0000.svg?style=for-the-badge&logo=Streamlit&logoColor=red&color=white" alt="Streamlit">
-  <img src="https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=Python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/DuckDuckGo-%23FFFFFF.svg?style=for-the-badge&logo=DuckDuckGo&logoColor=red&color=white" alt="DuckDuckGo">
-  <img src="https://img.shields.io/badge/Langchain-%23FF000.svg?style=for-the-badge&logo=Langchain&logoColor=white" alt="Langchain">
-</p>
-
-## 🌟 Features
-
-- **Interactive Interface**: Seamlessly interact with the personal agent through a user-friendly Streamlit interface.
-- **Robust Language Models**: Leverage state-of-the-art language models including OpenAI's GPT, DuckDuckGo search, and mathematical reasoning capabilities.
-- **Customizable Queries**: Empower users to ask tailored questions through OpenAI's API key integration, ensuring personalized responses.
-- **Real-time Responses**: Receive instantaneous responses to your queries, providing timely assistance whenever you need it. 🚀⏱️
-
-## 📸 Image Gallery
-
-### Main Interface
-
-![Main Interface](ss/Onboarding.png)
-
-Dive into the immersive main interface of the personal agent application, offering a visually engaging experience. 🌟
-
-### Custom Questions
-
-![Custom Questions](ss/Adiyogi.png)
-
-![API Key](ss/API_Key.png)
-
-![PM](ss/PM.png)
-
-![PM Modi](ss/PM_Modi.png)
-
-These screenshots showcase the versatility of the personal agent, allowing users to pose custom questions through OpenAI's API key integration. 🎨📸
+## Features
+- **Modern Web UI**: Chat interface with avatars, streaming, and export.
+- **OpenAI GPT Integration**: All chat and agent logic uses OpenAI's GPT models.
+- **Bright Data Web Search**: Real-time web search (enable/disable as needed).
+- **Multi-Agent System**: Manager, Critic, FactCheck, and Validator agents communicate via JSON for robust, validated answers.
+- **User Auth & Admin**: Register/login, profile, admin user/chat management.
+- **Memory**: Short-term (SQLite) and long-term (ChromaDB) memory for each user.
+- **Extensible**: Add more tools, agents, or LLMs easily.
 
 ## Setup
-
-1. **Clone the Repository**: Get started by cloning the repository to your local machine:
-
+1. **Clone the Repository**
    ```bash
    git clone https://github.com/pramodkoujalagi/AI-Personal-Agent.git
-
-
-2. Install the required dependencies:
-   
+   cd AI-Personal-Agent
+   ```
+2. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
-
-3. Set up environment variables by creating a `.env` file and adding your OpenAI API key:
-
-    ```bash
-    OPENAI_API_KEY=your_openai_api_key
-    ```
-
-
-
-## Usage
-
-1. **Run the Streamlit application:**
-   ```bash
-   streamlit run agent.py
+3. **Set up your `.env` file**
+   ```env
+   OPENAI_API_KEY=your_openai_api_key
+   FLASK_SECRET_KEY=your_flask_secret
+   BRIGHTDATA_API_KEY=your_brightdata_api_key  # (optional, for web search)
+   BRIGHTDATA_DATASET_ID=your_brightdata_dataset_id  # (optional)
    ```
 
+## Usage
+- **Run the Flask app:**
+  ```bash
+  python3 app.py
+  ```
+- **Open in browser:**
+  Visit [http://localhost:5000](http://localhost:5000)
 
-2. **Access the Application:** Open your preferred web browser and access the application to start interacting with the personal agent.
+- **Multi-Agent API:**
+  POST to `/multi_agent_chat` with a `message` to see manager/critic/factcheck/validation flow in JSON.
 
+## Customization
+- To enable/disable Bright Data search, edit the `search_brightdata` function in `app.py`.
+- To add more agents or tools, see `multi_agent_system.py` and `persona_agent.py`.
 
-3. **Engage with the Personal Agent:** Enter your queries in the chat interface and experience the responsiveness of the personal agent firsthand. 💡👨‍💻
+## Screenshots
+See the `/ss/` folder for UI examples.
 
-## Configuration
+## License
+MIT License
 
-- **Customize Behavior:** Tailor the behavior of the personal agent by modifying the code in agent.py.
-- **Adjust Parameters:** Fine-tune temperature settings and other parameters in the language model initialization to enhance the quality of responses.
+---
 
-## Contributor
-
-[Pramod Koujalagi](https://github.com/pramodkoujalagi)
-
-Feel free to explore, engage, and contribute to this exciting project! 🌟🚀
-
-## ⚖️ License
-[MIT License](LICENSE)
+For more, see the code and comments in each file. Contributions welcome!
 
 

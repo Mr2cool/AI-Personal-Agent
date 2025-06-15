@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Search Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background: #f4f6fa; font-family: 'Inter', sans-serif; }
+        .chat-container { max-width: 700px; margin: 48px auto; background: #fff; border-radius: 1.5rem; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 2.5rem 2rem; }
+        .chat-title { font-weight: 600; font-size: 2rem; color: #22223b; margin-bottom: 1.5rem; }
+        .msg { margin-bottom: 1.2rem; padding: 0.8rem 1.2rem; border-radius: 1rem; display: flex; align-items: flex-end; }
+        .msg-user { background: #e0e7ff; color: #3730a3; text-align: right; margin-left: 20%; justify-content: flex-end; }
+        .msg-agent { background: #f1f5f9; color: #22223b; text-align: left; margin-right: 20%; justify-content: flex-start; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; margin: 0 0.75rem; object-fit: cover; border: 2px solid #e0e7ff; }
+        .avatar-user { background: #6366f1; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+        .avatar-agent { background: #fbbf24; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+        .chat-form { display: flex; gap: 0.5rem; margin-top: 2rem; }
+        .chat-form input { flex: 1; border-radius: 0.75rem; border: 1px solid #cbd5e1; padding: 0.75rem; font-size: 1rem; }
+        .chat-form button { border-radius: 0.75rem; font-weight: 600; }
+        .footer { margin-top: 2.5rem; text-align: center; color: #64748b; font-size: 0.95rem; }
+        .brand { color: #6366f1; font-weight: 600; }
+    </style>
+</head>
+<body>
+<div class="chat-container">
+    <div class="chat-title">AI Search Assistant <span class="brand">(Production UI)</span></div>
+    <div id="chat-history">
+        {% for role, msg in chat_history %}
+            <div class="msg {% if role == 'user' %}msg-user{% else %}msg-agent{% endif %}">
+                {% if role == 'user' %}
+                    <div class="avatar avatar-user">U</div>
+                {% else %}
+                    <div class="avatar avatar-agent">A</div>
+                {% endif %}
+                <div><strong>{{ 'You' if role == 'user' else 'Agent' }}:</strong> {{ msg }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    <form id="chat-form" method="post" class="chat-form">
+        <input type="text" name="message" id="chat-input" placeholder="Type your question..." required autofocus autocomplete="off">
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+    <div class="footer">
+        Powered by <span class="brand">Google ADK</span> & <span class="brand">Bright Data</span> | &copy; 2025
+        <br>
+        <a href="/export_chat" class="btn btn-link btn-sm mt-2">Export Chat History (CSV)</a>
+    </div>
+</div>
+<script>
+const chatForm = document.getElementById('chat-form');
+const chatInput = document.getElementById('chat-input');
+const chatHistory = document.getElementById('chat-history');
+let isStreaming = false;
+
+function showTypingIndicator() {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'msg msg-agent';
+    typingDiv.id = 'typing-indicator';
+    typingDiv.innerHTML = "<div class='avatar avatar-agent'>A</div><div><strong>Agent:</strong> <em>typing...</em></div>";
+    chatHistory.appendChild(typingDiv);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const typingDiv = document.getElementById('typing-indicator');
+    if (typingDiv) typingDiv.remove();
+}
+
+chatForm.onsubmit = async function(e) {
+    e.preventDefault();
+    if (isStreaming) return;
+    isStreaming = true;
+    const userMsg = chatInput.value;
+    chatHistory.innerHTML += `<div class='msg msg-user'><div class='avatar avatar-user'>U</div><div><strong>You:</strong> ${userMsg}</div></div>`;
+    chatInput.value = '';
+    showTypingIndicator();
+    // Stream agent response
+    const responseDiv = document.createElement('div');
+    responseDiv.className = 'msg msg-agent';
+    responseDiv.innerHTML = "<div class='avatar avatar-agent'>A</div><div><strong>Agent:</strong> <span id='stream-response'></span></div>";
+    chatHistory.appendChild(responseDiv);
+    const streamSpan = responseDiv.querySelector('#stream-response');
+    try {
+        const res = await fetch('/stream_chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'message=' + encodeURIComponent(userMsg)
+        });
+        if (!res.ok) throw new Error('Network error');
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let done = false;
+        while (!done) {
+            const { value, done: doneReading } = await reader.read();
+            done = doneReading;
+            if (value) {
+                streamSpan.textContent += decoder.decode(value);
+            }
+        }
+    } catch (err) {
+        streamSpan.textContent = '[Error: ' + err.message + ']';
+    } finally {
+        removeTypingIndicator();
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+        isStreaming = false;
+    }
+};
+</script>
+</body>
+</html>

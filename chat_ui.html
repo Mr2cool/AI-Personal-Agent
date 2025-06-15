@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat (Gemini + Bright Data)</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6fa; margin: 0; padding: 0; }
+        .chat-container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 24px; }
+        .chat-log { min-height: 300px; margin-bottom: 16px; max-height: 400px; overflow-y: auto; }
+        .msg { margin: 8px 0; display: flex; align-items: flex-start; }
+        .user { color: #1976d2; font-weight: bold; }
+        .ai { color: #388e3c; font-weight: bold; }
+        .bubble { display: inline-block; padding: 10px 16px; border-radius: 16px; background: #e3f2fd; margin: 2px 0; max-width: 80%; word-break: break-word; }
+        .ai .bubble { background: #e8f5e9; }
+        .msg.user { flex-direction: row-reverse; }
+        .msg.user .bubble { background: #bbdefb; }
+        .msg.user .user { margin-left: 8px; }
+        .msg.ai .ai { margin-right: 8px; }
+        form { display: flex; gap: 8px; }
+        input[type=text] { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+        button { padding: 10px 18px; border-radius: 8px; border: none; background: #1976d2; color: #fff; font-weight: bold; cursor: pointer; }
+        button:disabled { background: #90caf9; }
+        @media (max-width: 650px) {
+            .chat-container { max-width: 98vw; padding: 10px; }
+            .chat-log { max-height: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h2>AI Chat (Gemini + Bright Data)</h2>
+        <div class="chat-log" id="chat-log" aria-live="polite"></div>
+        <form id="chat-form" autocomplete="off">
+            <input type="text" id="user-input" placeholder="Type your message or search..." autocomplete="off" required aria-label="Message input" />
+            <button type="submit" id="send-btn">Send</button>
+        </form>
+    </div>
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, function(m) {
+                return ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                })[m];
+            });
+        }
+
+        function addMessage(role, text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'msg ' + role;
+            msgDiv.innerHTML = `
+                <span class="${role}">${role === 'user' ? 'You' : 'AI'}:</span>
+                <span class="bubble">${escapeHTML(text)}</span>
+            `;
+            chatLog.appendChild(msgDiv);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        function addThinking() {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'msg ai';
+            msgDiv.innerHTML = `<span class="ai">AI:</span> <span class="bubble"><em>Thinking...</em></span>`;
+            chatLog.appendChild(msgDiv);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        chatForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const text = userInput.value.trim();
+            if (!text) return;
+            addMessage('user', text);
+            userInput.value = '';
+            userInput.focus();
+            sendBtn.disabled = true;
+            addThinking();
+            try {
+                const res = await fetch('http://localhost:8000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+                const data = await res.json();
+                chatLog.lastChild.remove(); // Remove 'Thinking...'
+                addMessage('ai', data.response || 'No response.');
+            } catch (err) {
+                chatLog.lastChild.remove();
+                addMessage('ai', 'Error: Could not reach server.');
+            }
+            sendBtn.disabled = false;
+        };
+
+        userInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                chatForm.dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}));
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

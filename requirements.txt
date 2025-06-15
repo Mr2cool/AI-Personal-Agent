@@ -4,3 +4,6 @@ langchain==0.1.10
 langchain_community==0.0.24
 langchain_core==0.1.28
 langchain_openai==0.0.7
+openai
+flask
+chromadb
